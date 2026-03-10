@@ -15,15 +15,12 @@
         }
         /* ヒーローセクションの暗幕 */
         .hero-overlay {
-            background: linear-gradient(to top, #0a0a0a 0%, transparent 50%, #0a0a0a 100%);
+            background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.4) 50%, #0a0a0a 100%);
         }
         
         /* --- 画像の割り当て設定 --- */
-        /* Hero背景: 雰囲気のあるカウンター写真を使用 */
         .img-hero { background-image: url('image_2.png'); }
-        /* オープン空間: カウンター席 (Image 15) */
         .img-open { background-image: url('image_2.png'); }
-        /* クローズド空間: ソファ席 (Image 16) */
         .img-closed { background-image: url('image_3.png'); }
 
         /* テキストの行間設定 */
@@ -44,13 +41,22 @@
             <div class="absolute inset-0 img-hero bg-cover bg-center opacity-40 scale-110 transition-transform duration-[10s]" id="hero-bg"></div>
             <div class="absolute inset-0 hero-overlay"></div>
             
-            <div class="relative z-10 text-center px-4" data-aos="fade-up" data-aos-duration="2500">
+            <div class="relative z-10 text-center px-4 mt-12" data-aos="fade-up" data-aos-duration="2500">
                 <h1 class="text-3xl md:text-5xl mb-8 tracking-[0.3em] font-extralight text-white/90">静寂を、嗜む。</h1>
-                <div class="h-[1px] w-12 bg-amber-700 mx-auto"></div>
-                <p class="mt-8 text-[10px] tracking-[0.4em] text-stone-500 uppercase">Members Only Bar Akasaka</p>
+                
+                <div class="h-[1px] w-12 bg-amber-700 mx-auto mb-10"></div>
+                
+                <div class="space-y-6 text-[11px] md:text-sm tracking-[0.2em] md:tracking-[0.25em] leading-[2.5] text-stone-300 font-light">
+                    <p>赤坂の喧騒を離れた、雑居ビルの2階。<br>
+                    重厚な扉を開ければ、そこは一人の紳士が愛した<br>
+                    「隠れ家書斎」のような空間が広がります。</p>
+                    <p>お気に入りの本をめくるように、<br>
+                    琥珀色のグラスを傾け、自分だけの思考に耽る。<br>
+                    誰にも邪魔されない、大人のための秘密基地。</p>
+                </div>
             </div>
 
-            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-stone-600 text-[9px] tracking-[0.5em] animate-bounce opacity-50">SCROLL</div>
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-600 text-[9px] tracking-[0.5em] animate-bounce opacity-50">SCROLL</div>
         </section>
 
         <section class="py-32 px-6 max-w-5xl mx-auto">
@@ -75,8 +81,8 @@
             <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-stone-800 to-transparent mb-32" data-aos="fade-up"></div>
 
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                 <div class="relative aspect-[4/3] bg-stone-900 shadow-2xl group rounded-sm overflow-hidden md:order-1 order-2" data-aos="fade-right" data-aos-duration="1500">
-                     <div class="absolute inset-0 img-closed bg-cover bg-center grayscale transition-all duration-1000 group-hover:grayscale-0 scale-100 group-hover:scale-105"></div>
+                <div class="relative aspect-[4/3] bg-stone-900 shadow-2xl group rounded-sm overflow-hidden md:order-1 order-2" data-aos="fade-right" data-aos-duration="1500">
+                    <div class="absolute inset-0 img-closed bg-cover bg-center grayscale transition-all duration-1000 group-hover:grayscale-0 scale-100 group-hover:scale-105"></div>
                 </div>
                 <div class="space-y-6 leading-loose-text font-light text-stone-400 md:order-2 order-1" data-aos="fade-left" data-aos-duration="1500">
                     <h2 class="text-lg text-amber-700 italic tracking-[0.2em]">THE PRIVATE - Closed Lounge</h2>
@@ -120,17 +126,11 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // アニメーション初期化
         AOS.init({ once: true, offset: 100 });
-
-        // ページ読み込み完了時の動作
         window.onload = () => {
-            // 背景画像のズームアウト開始
             const bg = document.getElementById('hero-bg');
             bg.style.transform = 'scale(1)';
         };
-
-        // スクロール時のナビゲーションバーの挙動
         window.onscroll = () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
