@@ -13,17 +13,15 @@
             background-color: #0a0a0a;
             color: #c9c2ba;
         }
-        /* ヒーローセクションの暗幕 */
         .hero-overlay {
             background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.4) 50%, #0a0a0a 100%);
         }
-        
-        /* --- 画像の割り当て設定 --- */
         .img-hero { background-image: url('image_2.png'); }
         .img-open { background-image: url('image_2.png'); }
         .img-closed { background-image: url('image_3.png'); }
+        /* フードセクション用の雰囲気画像（必要に応じて差し替え） */
+        .img-food { background-image: url('image_3.png'); filter: brightness(0.6); }
 
-        /* テキストの行間設定 */
         .leading-loose-text { line-height: 2.4; }
     </style>
 </head>
@@ -43,9 +41,7 @@
             
             <div class="relative z-10 text-center px-4 mt-12" data-aos="fade-up" data-aos-duration="2500">
                 <h1 class="text-3xl md:text-5xl mb-8 tracking-[0.3em] font-extralight text-white/90">静寂を、嗜む。</h1>
-                
                 <div class="h-[1px] w-12 bg-amber-700 mx-auto mb-10"></div>
-                
                 <div class="space-y-6 text-[11px] md:text-sm tracking-[0.2em] md:tracking-[0.25em] leading-[2.5] text-stone-300 font-light">
                     <p>赤坂の喧騒を離れた、雑居ビルの2階。<br>
                     重厚な扉を開ければ、そこは一人の紳士が愛した<br>
@@ -55,13 +51,12 @@
                     誰にも邪魔されない、大人のための秘密基地。</p>
                 </div>
             </div>
-
             <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-600 text-[9px] tracking-[0.5em] animate-bounce opacity-50">SCROLL</div>
         </section>
 
         <section class="py-32 px-6 max-w-5xl mx-auto">
             
-            <div class="grid md:grid-cols-2 gap-12 items-center mb-32">
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-40">
                 <div class="space-y-6 leading-loose-text font-light text-stone-400" data-aos="fade-right" data-aos-duration="1500">
                     <h2 class="text-lg text-amber-700 italic tracking-[0.2em]">THE BAR - Open Space</h2>
                     <div class="h-[1px] w-8 bg-amber-900/30 mb-6"></div>
@@ -78,9 +73,7 @@
                 </div>
             </div>
 
-            <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-stone-800 to-transparent mb-32" data-aos="fade-up"></div>
-
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-40">
                 <div class="relative aspect-[4/3] bg-stone-900 shadow-2xl group rounded-sm overflow-hidden md:order-1 order-2" data-aos="fade-right" data-aos-duration="1500">
                     <div class="absolute inset-0 img-closed bg-cover bg-center grayscale transition-all duration-1000 group-hover:grayscale-0 scale-100 group-hover:scale-105"></div>
                 </div>
@@ -92,9 +85,52 @@
                         ゆったりと身体を預けられるソファ席で、<br>
                         周囲を気にすることなく、<br>
                         大切な方々との深く、密やかな時間を。<br>
-                        まさに「秘密基地」と呼ぶにふさわしい空間です。<br>
-                        ※会食に合わせたFoodメニューもご用意いたします
+                        まさに「秘密基地」と呼ぶにふさわしい空間です。
                     </p>
+                </div>
+            </div>
+
+            <div class="py-20 bg-stone-900/20 border border-white/5 rounded-sm p-8 md:p-16" data-aos="fade-up" data-aos-duration="1500">
+                <div class="text-center mb-16">
+                    <h2 class="text-lg text-amber-700 italic tracking-[0.3em] mb-4">GASTRONOMY</h2>
+                    <p class="text-xs text-stone-500 tracking-widest uppercase">Bespoke Dining Experience</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-16 items-start">
+                    <div class="space-y-8 text-sm leading-[2.2] font-light text-stone-400">
+                        <p>
+                            「書斎」でのひとときは、美酒だけでは完成しません。<br>
+                            BAR ORIGINEでは、会食や特別な夜にふさわしい、<br>
+                            本格的なガストロノミーをご用意しております。
+                        </p>
+                        <p>
+                            厳選された旬の食材を用いた、お酒に寄り添う一皿。<br>
+                            会員様お一人おひとりのご要望に合わせた、<br>
+                            「お誂え」の晩餐をお愉しみください。
+                        </p>
+                        <p class="text-[11px] text-stone-500 italic">
+                            ※コース料理・会食利用は事前予約にて承ります。<br>
+                            ご予算、アレルギー等お気軽にご相談ください。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-black/40 p-8 border border-amber-900/20 rounded-sm">
+                        <h3 class="text-amber-800 text-xs tracking-widest mb-8 border-b border-amber-900/20 pb-4">SIGNATURE SELECTIONS</h3>
+                        <ul class="space-y-6 text-sm tracking-widest font-light">
+                            <li class="flex justify-between items-baseline border-b border-white/5 pb-2">
+                                <span>季節の鮮魚と彩り野菜のオードブル</span>
+                            </li>
+                            <li class="flex justify-between items-baseline border-b border-white/5 pb-2">
+                                <span>黒毛和牛の低温ロースト 〜赤ワインのソース〜</span>
+                            </li>
+                            <li class="flex justify-between items-baseline border-b border-white/5 pb-2">
+                                <span>トリュフ香る 濃厚なポルチーニのリゾット</span>
+                            </li>
+                            <li class="flex justify-between items-baseline border-b border-white/5 pb-2">
+                                <span>自家製ショコラとウィスキーのマリアージュ</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -104,13 +140,11 @@
             <div class="absolute inset-0 bg-[url('image_2.png')] bg-cover bg-center opacity-5 mix-blend-overlay pointer-events-none"></div>
             <div data-aos="fade-up" data-aos-duration="1500" class="relative z-10">
                 <h3 class="text-[10px] tracking-[0.6em] text-amber-800 mb-12 uppercase">Inquiries & Reservation</h3>
-                
                 <div class="space-y-4 mb-16 text-sm tracking-widest leading-loose text-stone-300 font-light">
                     <p>東京都港区赤坂3-12-1 倶会ビル2F C号室</p>
                     <p>Mon - Fri : 20:00 - 24:00</p>
                     <p class="text-stone-600 text-[11px] mt-4">※会員制 / 24時以降は要事前相談</p>
                 </div>
-
                 <a href="https://reserva.be/barorigine" target="_blank" class="inline-block group relative">
                     <div class="absolute -inset-4 border border-amber-900/30 group-hover:border-amber-600 transition-all duration-700"></div>
                     <span class="relative z-10 text-amber-200 text-lg tracking-[0.6em] px-12 py-4 block bg-[#0a0a0a] transition-colors group-hover:bg-[#0f0f0f]">
@@ -118,7 +152,6 @@
                     </span>
                 </a>
             </div>
-
             <footer class="mt-32 opacity-30 text-[9px] tracking-[0.3em] relative z-10">
                 &copy; ORIGINE AKASAKA. MEMBERS ONLY.
             </footer>
