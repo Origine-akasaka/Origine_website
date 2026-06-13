@@ -3,178 +3,494 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAR ORIGINE | 会員制 隠れ家書斎</title>
+    <title>ORIGINE | 東京・赤坂 フレンチガストロノミー</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
+        :root {
+            --bg:       #080808;
+            --surface:  #101010;
+            --gold:     #9a7c3a;
+            --gold-dim: #5a4820;
+            --text:     #c4bdb4;
+            --muted:    #6b6560;
+        }
+        * { box-sizing: border-box; }
         body {
             font-family: 'Shippori Mincho', serif;
-            background-color: #0a0a0a;
-            color: #c9c2ba;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ─── NAV ──────────────────────────────── */
+        #navbar {
+            transition: padding .5s, background .5s, backdrop-filter .5s;
+        }
+        #navbar.scrolled {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            background: rgba(8,8,8,.92);
+            backdrop-filter: blur(12px);
+        }
+
+        /* ─── HERO ─────────────────────────────── */
+        .hero-bg {
+            background-image: url('image_2.png');
+            background-size: cover;
+            background-position: center;
+            transition: transform 12s ease-out;
         }
         .hero-overlay {
-            background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.4) 50%, #0a0a0a 100%);
+            background: linear-gradient(
+                to top,
+                #080808 0%,
+                rgba(8,8,8,.55) 45%,
+                rgba(8,8,8,.25) 70%,
+                #080808 100%
+            );
         }
-        .img-hero { background-image: url('image_2.png'); }
-        .img-open { background-image: url('image_2.png'); }
-        .img-closed { background-image: url('image_3.png'); }
-        /* フードセクション用の雰囲気画像（必要に応じて差し替え） */
-        .img-food { background-image: url('image_3.png'); filter: brightness(0.6); }
 
-        .leading-loose-text { line-height: 2.4; }
+        /* ─── GOLD LINE ─────────────────────────── */
+        .gold-rule {
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            width: 0;
+            transition: width 1.8s cubic-bezier(.4,0,.2,1);
+        }
+        .gold-rule.animate { width: 100%; }
+
+        /* ─── SECTION IMAGES ────────────────────── */
+        .img-salle   { background-image: url('Image (13).jpg'); }
+        .img-salon   { background-image: url('Image (14).jpg'); }
+        .img-wine    { background-image: url('image_3.png'); }
+
+        /* ─── GRAYSCALE HOVER ───────────────────── */
+        .photo-frame .inner {
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(1) brightness(.8);
+            transform: scale(1.04);
+            transition: filter 1s ease, transform 1.2s ease;
+        }
+        .photo-frame:hover .inner {
+            filter: grayscale(0) brightness(.9);
+            transform: scale(1);
+        }
+
+        /* ─── MENU CARD ─────────────────────────── */
+        .menu-card {
+            border: 1px solid rgba(154,124,58,.18);
+            background: rgba(16,10,2,.55);
+        }
+        .menu-item + .menu-item {
+            border-top: 1px solid rgba(255,255,255,.05);
+        }
+
+        /* ─── CORMORANT ─────────────────────────── */
+        .cormorant {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        /* ─── SCROLL INDICATOR ──────────────────── */
+        @keyframes fadeDown {
+            0%,100%{ opacity:.3; transform:translateY(0); }
+            50%    { opacity:.7; transform:translateY(6px); }
+        }
+        .scroll-hint { animation: fadeDown 2s infinite; }
+
+        /* ─── DIVIDER ────────────────────────────── */
+        .section-rule {
+            width: 40px; height: 1px;
+            background: var(--gold-dim);
+            margin: 1.5rem 0;
+        }
+
+        /* ─── CTA BUTTON ─────────────────────────── */
+        .cta-outer {
+            position: relative;
+            display: inline-block;
+        }
+        .cta-outer::before {
+            content:'';
+            position:absolute;
+            inset: -12px;
+            border: 1px solid rgba(154,124,58,.3);
+            transition: border-color .7s;
+        }
+        .cta-outer:hover::before { border-color: var(--gold); }
+        .cta-inner {
+            position: relative;
+            display: block;
+            padding: 1rem 3.5rem;
+            letter-spacing: .5em;
+            color: #e8dfc8;
+            background: var(--bg);
+            font-size: .85rem;
+            transition: background .5s;
+        }
+        .cta-outer:hover .cta-inner { background: #0e0e0e; }
+
+        /* ─── PRICE ──────────────────────────────── */
+        .price-tag {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            color: var(--gold);
+            letter-spacing: .05em;
+        }
     </style>
 </head>
-<body class="overflow-x-hidden">
+<body>
 
-    <nav class="fixed w-full z-50 px-6 py-8 flex justify-between items-center transition-all duration-500" id="navbar">
-        <div class="text-xl md:text-2xl tracking-[0.4em] font-light text-amber-700">ORIGINE</div>
-        <a href="https://reserva.be/barorigine" target="_blank" class="text-[10px] tracking-[0.3em] border border-amber-900/50 px-5 py-2 hover:bg-amber-900/20 hover:border-amber-600 transition-all duration-500 bg-black/20 backdrop-blur-sm">
-            RESERVE
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav class="fixed w-full z-50 px-8 py-7 flex justify-between items-center" id="navbar">
+    <div class="cormorant text-2xl tracking-[.45em] text-amber-600 font-light">ORIGINE</div>
+    <a href="https://reserva.be/barorigine" target="_blank"
+       class="text-[10px] tracking-[.3em] border border-amber-900/50 px-5 py-2
+              hover:bg-amber-900/20 hover:border-amber-600 transition-all duration-500
+              bg-black/20 backdrop-blur-sm">
+        ご予約
+    </a>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 hero-bg opacity-45 scale-110" id="hero-bg"></div>
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <div class="relative z-10 text-center px-6 mt-16" data-aos="fade-up" data-aos-duration="2500">
+        <p class="cormorant text-[11px] md:text-xs tracking-[.7em] text-amber-700 mb-8 uppercase">
+            Gastronomie Française · Akasaka Tokyo
+        </p>
+        <h1 class="text-4xl md:text-6xl mb-6 tracking-[.25em] font-extralight text-white/90">
+            一皿に、宇宙がある。
+        </h1>
+        <span class="gold-rule mx-auto mb-10 block" id="hero-rule" style="max-width:120px"></span>
+        <div class="space-y-5 text-[11px] md:text-sm tracking-[.2em] md:tracking-[.22em]
+                    leading-[2.6] text-stone-300 font-light max-w-xl mx-auto">
+            <p>赤坂の喧騒から一歩外れた、静謐な路地の奥。<br>
+               重厚な扉の向こうに広がるのは、食材と対話する<br>
+               シェフが紡ぐ、季節のガストロノミーの世界。</p>
+            <p>日本の四季が持つ豊かさと、フランス料理の叡智が交差する<br>
+               一夜限りの物語を、ここ<em class="cormorant not-italic">ORIGINE</em>からはじめてください。</p>
+        </div>
+    </div>
+
+    <div class="absolute bottom-9 left-1/2 -translate-x-1/2 scroll-hint
+                text-stone-600 text-[9px] tracking-[.55em]">SCROLL</div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PHILOSOPHY
+══════════════════════════════════════════ -->
+<section class="py-28 px-6 text-center max-w-2xl mx-auto" data-aos="fade-up" data-aos-duration="1800">
+    <p class="cormorant text-xs tracking-[.6em] text-amber-800 uppercase mb-10">
+        Notre Philosophie
+    </p>
+    <p class="text-sm md:text-base leading-[2.8] font-light text-stone-300 tracking-[.12em]">
+        「旬」とは、その食材が最も美しく輝く、ただ一瞬のことです。<br>
+        ORIGINEでは、産地を直接訪ね、農家・漁師と対話しながら選びぬいた<br>
+        素材だけを用います。技法はフランスの古典に根ざしながらも、<br>
+        感性は常に日本の繊細さに宿る。それが私たちの料理哲学です。
+    </p>
+    <div class="mt-12">
+        <span class="block gold-rule mx-auto" id="phi-rule" style="max-width:200px"></span>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     MAIN SECTIONS (SALLE / SALON)
+══════════════════════════════════════════ -->
+<section class="pb-10 px-6 max-w-5xl mx-auto">
+
+    <!-- THE SALLE -->
+    <div class="grid md:grid-cols-2 gap-14 items-center mb-36">
+        <div class="space-y-5 font-light text-stone-400 leading-[2.4]"
+             data-aos="fade-right" data-aos-duration="1500">
+            <p class="cormorant text-xl tracking-[.25em] text-amber-700">THE SALLE</p>
+            <p class="text-[10px] tracking-[.4em] text-stone-600 uppercase">Gastronomie · Comptoir Ouvert</p>
+            <div class="section-rule"></div>
+            <p class="text-sm tracking-[.1em]">
+                吹き抜けのオープンキッチンを望む、メインダイニング。<br>
+                カウンター席からはシェフの手元が目前に広がり、<br>
+                包丁の音、炎の揺らぎ、立ち上る芳香まで、<br>
+                調理そのものが「第一のコース」となります。
+            </p>
+            <p class="text-sm tracking-[.1em]">
+                テーブル席では、静かな照明の下、<br>
+                大切な方との会話が、料理とともに深まっていく。<br>
+                日常を手放すための、上質な非日常がここにあります。
+            </p>
+        </div>
+        <div class="relative aspect-[4/3] photo-frame rounded-sm overflow-hidden shadow-2xl"
+             data-aos="fade-left" data-aos-duration="1500">
+            <div class="absolute inset-0 inner img-salle"></div>
+        </div>
+    </div>
+
+    <!-- LE SALON PRIVÉ -->
+    <div class="grid md:grid-cols-2 gap-14 items-center mb-36">
+        <div class="relative aspect-[4/3] photo-frame rounded-sm overflow-hidden shadow-2xl
+                    md:order-1 order-2"
+             data-aos="fade-right" data-aos-duration="1500">
+            <div class="absolute inset-0 inner img-salon"></div>
+        </div>
+        <div class="space-y-5 font-light text-stone-400 leading-[2.4] md:order-2 order-1"
+             data-aos="fade-left" data-aos-duration="1500">
+            <p class="cormorant text-xl tracking-[.25em] text-amber-700">LE SALON PRIVÉ</p>
+            <p class="text-[10px] tracking-[.4em] text-stone-600 uppercase">Table Privée · Salon Fermé</p>
+            <div class="section-rule"></div>
+            <p class="text-sm tracking-[.1em]">
+                完全個室の「サロン・プリヴェ」は、<br>
+                大切な記念日、接待、ご家族でのお祝いに。<br>
+                専任のサービスが空間全体を包み、<br>
+                外の世界とは隔絶された、密やかな晩餐の時間を。
+            </p>
+            <p class="text-sm tracking-[.1em]">
+                装花・記念品・特別メニューのご要望も、<br>
+                事前にご相談いただければ、誂えの一夜をご用意いたします。
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════
+     MENU
+══════════════════════════════════════════ -->
+<section class="py-28 px-6 max-w-5xl mx-auto" data-aos="fade-up" data-aos-duration="1500">
+    <div class="text-center mb-20">
+        <p class="cormorant text-xl tracking-[.35em] text-amber-700 mb-3">MENU</p>
+        <p class="text-[10px] tracking-[.5em] text-stone-600 uppercase">Déjeuner &amp; Dîner</p>
+        <div class="mt-8"><span class="gold-rule mx-auto block" id="menu-rule" style="max-width:160px"></span></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- DÉJEUNER -->
+        <div class="menu-card rounded-sm p-8 md:p-10">
+            <div class="mb-8 border-b border-amber-900/20 pb-6">
+                <p class="cormorant text-lg tracking-[.3em] text-amber-700 mb-1">Déjeuner</p>
+                <p class="text-[10px] tracking-[.4em] text-stone-600">LUNCH · 火〜土 12:00 – 15:00</p>
+            </div>
+
+            <div class="space-y-0">
+                <div class="menu-item py-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <span class="text-sm tracking-[.12em] text-stone-300">ランチコース A</span>
+                        <span class="price-tag text-base ml-4">¥9,900</span>
+                    </div>
+                    <p class="text-[11px] text-stone-600 tracking-[.08em] leading-[1.9]">
+                        アミューズ / 前菜 / メイン / デザート / 小菓子
+                    </p>
+                </div>
+                <div class="menu-item py-6">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <span class="text-sm tracking-[.12em] text-stone-300">ランチコース B</span>
+                        <span class="price-tag text-base ml-4">¥16,500</span>
+                    </div>
+                    <p class="text-[11px] text-stone-600 tracking-[.08em] leading-[1.9]">
+                        アミューズ / 前菜 二皿 / 魚料理 / 肉料理 / デザート / 小菓子
+                    </p>
+                </div>
+                <div class="pt-6">
+                    <p class="text-[11px] text-stone-700 tracking-[.08em] leading-[2] italic">
+                        ※ 前日までの事前予約制。<br>
+                        ※ アレルギー・食材のご要望はご予約時にお申し付けください。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DÎNER -->
+        <div class="menu-card rounded-sm p-8 md:p-10">
+            <div class="mb-8 border-b border-amber-900/20 pb-6">
+                <p class="cormorant text-lg tracking-[.3em] text-amber-700 mb-1">Dîner</p>
+                <p class="text-[10px] tracking-[.4em] text-stone-600">DINNER · 月〜土 18:00 – 23:00</p>
+            </div>
+
+            <div class="space-y-0">
+                <div class="menu-item py-5">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <span class="text-sm tracking-[.12em] text-stone-300">ディナーコース</span>
+                        <span class="price-tag text-base ml-4">¥24,200</span>
+                    </div>
+                    <p class="text-[11px] text-stone-600 tracking-[.08em] leading-[1.9]">全7皿 · 季節のガストロノミー</p>
+                </div>
+                <div class="menu-item py-5">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <span class="text-sm tracking-[.12em] text-stone-300">グラン・コース</span>
+                        <span class="price-tag text-base ml-4">¥38,500</span>
+                    </div>
+                    <p class="text-[11px] text-stone-600 tracking-[.08em] leading-[1.9]">全9皿 · シェフが選ぶ最良の一夜</p>
+                </div>
+                <div class="menu-item py-5">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <span class="text-sm tracking-[.12em] text-stone-300">シェフズテーブル</span>
+                        <span class="price-tag text-base ml-4">¥60,500</span>
+                    </div>
+                    <p class="text-[11px] text-stone-600 tracking-[.08em] leading-[1.9]">全12皿 · ワインペアリング込</p>
+                </div>
+                <div class="pt-5">
+                    <p class="text-[11px] text-stone-700 tracking-[.08em] leading-[2] italic">
+                        ※ 税・サービス料込。<br>
+                        ※ メニューは旬の食材により変わります。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SIGNATURE DISHES
+══════════════════════════════════════════ -->
+<section class="py-20 px-6 max-w-3xl mx-auto text-center" data-aos="fade-up" data-aos-duration="1500">
+    <p class="cormorant text-xs tracking-[.55em] text-amber-800 uppercase mb-12">
+        Créations du Moment
+    </p>
+    <ul class="space-y-5 text-sm tracking-[.18em] font-light text-stone-400 leading-[2.2]">
+        <li class="border-b border-white/5 pb-5">
+            鮑と蕗のとう、バール産キャビアのアンサンブル
+        </li>
+        <li class="border-b border-white/5 pb-5">
+            天草産 活〆鮃のポワレ、白ワインと柚子のヴルーテ
+        </li>
+        <li class="border-b border-white/5 pb-5">
+            鹿児島黒毛和牛A5 フィレのロティ、ペリグー風トリュフソース
+        </li>
+        <li class="border-b border-white/5 pb-5">
+            フランス産フォワグラのソテー、桃とサントネールヴィネガーのコントラスト
+        </li>
+        <li class="pb-5">
+            自家製ショコラ "ORIGINEのテロワール"
+        </li>
+    </ul>
+    <p class="mt-10 text-[11px] text-stone-700 italic tracking-[.1em]">
+        ※ 料理内容は仕入れ状況により変更となります
+    </p>
+</section>
+
+<!-- ══════════════════════════════════════════
+     WINE & ACCORDS
+══════════════════════════════════════════ -->
+<section class="py-28 relative overflow-hidden">
+    <div class="absolute inset-0 img-wine bg-cover bg-center opacity-8"
+         style="filter:brightness(.25) grayscale(.5)"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto px-6 text-center"
+         data-aos="fade-up" data-aos-duration="1800">
+        <p class="cormorant text-xl tracking-[.35em] text-amber-700 mb-3">
+            Vins &amp; Accords
+        </p>
+        <p class="text-[10px] tracking-[.5em] text-stone-600 uppercase mb-12">
+            Wine · Natural · Champagne
+        </p>
+        <p class="text-sm leading-[2.8] font-light text-stone-400 tracking-[.12em]">
+            ソムリエが厳選したフランス各地の銘醸ワインを中心に、<br>
+            自然派ワイン、シャンパーニュを取り揃えております。<br>
+            コースに合わせたグラスペアリングも、<br>
+            「シェフズテーブル」をはじめ各コースに対応いたします。<br>
+            ノンアルコールペアリングもご用意しております。
+        </p>
+        <div class="mt-12">
+            <span class="gold-rule mx-auto block" style="max-width:120px"></span>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ACCESS & RESERVATION
+══════════════════════════════════════════ -->
+<section class="py-32 px-6 text-center relative overflow-hidden bg-[#060606] border-t border-white/5">
+    <div class="absolute inset-0 opacity-4"
+         style="background-image:url('image_2.png'); background-size:cover; background-position:center; mix-blend-mode:overlay;"></div>
+
+    <div class="relative z-10 max-w-xl mx-auto" data-aos="fade-up" data-aos-duration="1500">
+        <p class="cormorant text-xs tracking-[.6em] text-amber-800 uppercase mb-14">
+            Réservation &amp; Accès
+        </p>
+
+        <div class="space-y-4 mb-8 text-sm tracking-widest leading-loose text-stone-300 font-light">
+            <p>東京都港区赤坂 3-12-1 倶会ビル 2F</p>
+        </div>
+
+        <div class="border border-white/5 rounded-sm p-6 mb-14 text-sm
+                    tracking-[.15em] leading-[2.5] text-stone-500 font-light">
+            <div class="grid grid-cols-2 gap-y-3 text-left max-w-xs mx-auto">
+                <span class="text-stone-700">Déjeuner</span>
+                <span>火 – 土 &nbsp;12:00 – 15:00</span>
+                <span class="text-stone-700">Dîner</span>
+                <span>月 – 土 &nbsp;18:00 – 23:00</span>
+                <span class="text-stone-700">定休日</span>
+                <span>日曜・不定休</span>
+            </div>
+            <p class="text-[11px] text-stone-700 mt-5 tracking-[.08em] text-center">
+                ※ ランチは完全予約制 &nbsp;|&nbsp; ディナーは当日予約も承ります（空席状況による）
+            </p>
+        </div>
+
+        <a href="https://reserva.be/barorigine" target="_blank" class="cta-outer">
+            <span class="cta-inner cormorant not-italic" style="font-family:'Shippori Mincho',serif; letter-spacing:.5em;">
+                ご予約はこちら
+            </span>
         </a>
-    </nav>
 
-    <main>
-        <section class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 img-hero bg-cover bg-center opacity-40 scale-110 transition-transform duration-[10s]" id="hero-bg"></div>
-            <div class="absolute inset-0 hero-overlay"></div>
-            
-            <div class="relative z-10 text-center px-4 mt-12" data-aos="fade-up" data-aos-duration="2500">
-                <h1 class="text-3xl md:text-5xl mb-8 tracking-[0.3em] font-extralight text-white/90">静寂を、嗜む。</h1>
-                <div class="h-[1px] w-12 bg-amber-700 mx-auto mb-10"></div>
-                <div class="space-y-6 text-[11px] md:text-sm tracking-[0.2em] md:tracking-[0.25em] leading-[2.5] text-stone-300 font-light">
-                    <p>赤坂の喧騒を離れた、雑居ビルの2階。<br>
-                    重厚な扉を開ければ、そこは一人の紳士が愛した<br>
-                    「隠れ家書斎」のような空間が広がります。</p>
-                    <p>お気に入りの本をめくるように、<br>
-                    琥珀色のグラスを傾け、自分だけの思考に耽る。<br>
-                    誰にも邪魔されない、大人のための秘密基地。</p>
-                </div>
-            </div>
-            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-600 text-[9px] tracking-[0.5em] animate-bounce opacity-50">SCROLL</div>
-        </section>
+        <p class="mt-16 text-[11px] text-stone-700 tracking-[.15em] leading-[2.2]">
+            ご予約のご優先・特別なご要望については<br>
+            お電話またはメールにてお問い合わせください。
+        </p>
+    </div>
 
-        <section class="py-32 px-6 max-w-5xl mx-auto">
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center mb-40">
-                <div class="space-y-6 leading-loose-text font-light text-stone-400" data-aos="fade-right" data-aos-duration="1500">
-                    <h2 class="text-lg text-amber-700 italic tracking-[0.2em]">THE BAR - Open Space</h2>
-                    <div class="h-[1px] w-8 bg-amber-900/30 mb-6"></div>
-                    <p>
-                        扉を開けた先に広がる、<br>
-                        一枚板のカウンターが主役のオープンな空間。<br>
-                        美しくライトアップされたバックバーを眺めながら、<br>
-                        バーテンダーとの会話や、<br>
-                        その場の空気を愉しむ大人の社交場です。
-                    </p>
-                </div>
-                <div class="relative aspect-[4/3] bg-stone-900 shadow-2xl group rounded-sm overflow-hidden" data-aos="fade-left" data-aos-duration="1500">
-                    <div class="absolute inset-0 img-open bg-cover bg-center grayscale transition-all duration-1000 group-hover:grayscale-0 scale-100 group-hover:scale-105"></div>
-                </div>
-            </div>
+    <footer class="mt-28 opacity-25 text-[9px] tracking-[.35em] relative z-10">
+        &copy; ORIGINE AKASAKA. ALL RIGHTS RESERVED.
+    </footer>
+</section>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center mb-40">
-                <div class="relative aspect-[4/3] bg-stone-900 shadow-2xl group rounded-sm overflow-hidden md:order-1 order-2" data-aos="fade-right" data-aos-duration="1500">
-                    <div class="absolute inset-0 img-closed bg-cover bg-center grayscale transition-all duration-1000 group-hover:grayscale-0 scale-100 group-hover:scale-105"></div>
-                </div>
-                <div class="space-y-6 leading-loose-text font-light text-stone-400 md:order-2 order-1" data-aos="fade-left" data-aos-duration="1500">
-                    <h2 class="text-lg text-amber-700 italic tracking-[0.2em]">THE PRIVATE - Closed Lounge</h2>
-                    <div class="h-[1px] w-8 bg-amber-900/30 mb-6"></div>
-                    <p>
-                        奥に設えた、クローズドなラウンジスペース。<br>
-                        ゆったりと身体を預けられるソファ席で、<br>
-                        周囲を気にすることなく、<br>
-                        大切な方々との深く、密やかな時間を。<br>
-                        まさに「秘密基地」と呼ぶにふさわしい空間です。
-                    </p>
-                </div>
-            </div>
+<!-- ══════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════ -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ once: true, offset: 80 });
 
-            <div class="py-20 bg-stone-900/20 border border-white/5 rounded-sm p-8 md:p-16" data-aos="fade-up" data-aos-duration="1500">
-                <div class="text-center mb-16">
-                    <h2 class="text-lg text-amber-700 italic tracking-[0.3em] mb-4">GASTRONOMY</h2>
-                    <p class="text-xs text-stone-500 tracking-widest uppercase">Bespoke Dining Experience</p>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-16 items-start">
-                    <div class="space-y-8 text-sm leading-[2.2] font-light text-stone-400">
-                        <p>
-                            「書斎」でのひとときは、美酒だけでは完成しません。<br>
-                            BAR ORIGINEでは、会食や特別な夜にふさわしい、<br>
-                            本格的なガストロノミーをご用意しております。
-                        </p>
-                        <p>
-                            厳選された旬の食材を用いた、お酒に寄り添う一皿。<br>
-                            会員様お一人おひとりのご要望に合わせた、<br>
-                            「お誂え」の晩餐をお愉しみください。
-                        </p>
-                        <p class="text-[11px] text-stone-500 italic">
-                            ※コース料理・会食利用は事前予約にて承ります。<br>
-                            ご予算、アレルギー等お気軽にご相談ください。
-                        </p>
-                    </div>
-                    
-                    <div class="bg-black/40 p-8 border border-amber-900/20 rounded-sm">
-                        <h3 class="text-amber-800 text-xs tracking-widest mb-8 border-b border-amber-900/20 pb-4">SIGNATURE SELECTIONS</h3>
-                        <ul class="space-y-6 text-sm tracking-widest font-light">
-                            <li class="flex justify-between items-baseline border-b border-white/5 pb-2">
-                                <span>季節の鮮魚と彩り野菜のオードブル</span>
-                            </li>
-                            <li class="flex justify-between items-baseline border-b border-white/5 pb-2">
-                                <span>黒毛和牛の低温ロースト 〜赤ワインのソース〜</span>
-                            </li>
-                            <li class="flex justify-between items-baseline border-b border-white/5 pb-2">
-                                <span>トリュフ香る 濃厚なポルチーニのリゾット</span>
-                            </li>
-                            <li class="flex justify-between items-baseline border-b border-white/5 pb-2">
-                                <span>自家製ショコラとウィスキーのマリアージュ</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    // Hero parallax zoom-out
+    window.addEventListener('load', () => {
+        const bg = document.getElementById('hero-bg');
+        bg.style.transform = 'scale(1.0)';
+        // Animate gold rule
+        setTimeout(() => {
+            document.getElementById('hero-rule').classList.add('animate');
+        }, 1200);
+    });
 
-        </section>
+    // Navbar shrink
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
 
-        <section class="py-32 bg-[#080808] border-t border-white/5 px-6 text-center relative">
-            <div class="absolute inset-0 bg-[url('image_2.png')] bg-cover bg-center opacity-5 mix-blend-overlay pointer-events-none"></div>
-            <div data-aos="fade-up" data-aos-duration="1500" class="relative z-10">
-                <h3 class="text-[10px] tracking-[0.6em] text-amber-800 mb-12 uppercase">Inquiries & Reservation</h3>
-                <div class="space-y-4 mb-16 text-sm tracking-widest leading-loose text-stone-300 font-light">
-                    <p>東京都港区赤坂3-12-1 倶会ビル2F C号室</p>
-                    <p>Mon - Fri : 20:00 - 24:00</p>
-                    <p class="text-stone-600 text-[11px] mt-4">※会員制 / 24時以降は要事前相談</p>
-                </div>
-                <a href="https://reserva.be/barorigine" target="_blank" class="inline-block group relative">
-                    <div class="absolute -inset-4 border border-amber-900/30 group-hover:border-amber-600 transition-all duration-700"></div>
-                    <span class="relative z-10 text-amber-200 text-lg tracking-[0.6em] px-12 py-4 block bg-[#0a0a0a] transition-colors group-hover:bg-[#0f0f0f]">
-                        BOOK A TABLE
-                    </span>
-                </a>
-            </div>
-            <footer class="mt-32 opacity-30 text-[9px] tracking-[0.3em] relative z-10">
-                &copy; ORIGINE AKASAKA. MEMBERS ONLY.
-            </footer>
-        </section>
-    </main>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ once: true, offset: 100 });
-        window.onload = () => {
-            const bg = document.getElementById('hero-bg');
-            bg.style.transform = 'scale(1)';
-        };
-        window.onscroll = () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('bg-black/90', 'py-4', 'backdrop-blur-md');
-                nav.classList.remove('py-8', 'bg-transparent');
-            } else {
-                nav.classList.remove('bg-black/90', 'py-4', 'backdrop-blur-md');
-                nav.classList.add('py-8', 'bg-transparent');
+    // IntersectionObserver: animate gold rules when in view
+    const rules = document.querySelectorAll('.gold-rule:not(#hero-rule)');
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('animate');
+                io.unobserve(e.target);
             }
-        };
-    </script>
+        });
+    }, { threshold: 0.5 });
+    rules.forEach(r => io.observe(r));
+</script>
+
 </body>
 </html>
